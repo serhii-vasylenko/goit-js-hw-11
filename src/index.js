@@ -10,7 +10,6 @@ import { Notify } from 'notiflix';
 // const axios = require('axios').default;
 
 let searchQuery = '';
-searchQuery = searchQuery.toLowerCase();
 let page = 1;
 const limit = 40;
 
