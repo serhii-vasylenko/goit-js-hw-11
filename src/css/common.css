@@ -2,23 +2,53 @@
   box-sizing: border-box;
 }
 
+img, p {
+  margin: 0;
+}
+
 body {
-  margin: 16px;
+  /* margin: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #fafafa;
   color: #212121;
-  line-height: 1.5;
+  line-height: 1.5; */
+
+  /* padding: 15px; */
+  padding-bottom: 20px;
 }
 
 input {
   padding: 8px;
   font: inherit;
+  width: 300px;
+
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  border: none;
 }
 
 button {
   padding: 8px 12px;
   cursor: pointer;
+
+  background-color: darkgreen;
+  color: #fff;
+  border: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
+
+.button--hidden {
+  visibility: hidden;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
