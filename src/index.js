@@ -34,7 +34,7 @@ async function onFormSubmit(event) {
   const { totalHits, hits } = await fetchImages(searchQuery);
   page += 1;
 
-  if (totalHits === 0) {
+  if (totalHits === 0 || !searchQuery) {
     Notify.failure(
       'Sorry, there are no images matching your search query. Please try again.'
     );
