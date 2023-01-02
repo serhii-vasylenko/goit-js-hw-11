@@ -7,8 +7,6 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 import { Notify } from 'notiflix';
 
-// const axios = require('axios').default;
-
 let searchQuery = '';
 let page = 1;
 const limit = 40;
@@ -21,19 +19,12 @@ const refs = {
 };
 
 refs.searchForm.addEventListener('submit', onFormSubmit);
-// refs.fetchButton.addEventListener('click', onMoreButtonClick);
-
-window.addEventListener('scroll', function () {
-  if (window.innerHeight + window.pageYOffset === document.body.offsetHeight) {
-    onMoreButtonClick();
-  }
-});
+window.addEventListener('scroll', onEndPageScroll);
 
 async function onFormSubmit(event) {
   event.preventDefault();
   
   refs.galleryContainer.innerHTML = '';
-  // refs.fetchButton.classList.add('button--hidden');
   page = 1;
 
   searchQuery = event.target.elements.searchQuery.value;
@@ -49,16 +40,11 @@ async function onFormSubmit(event) {
   }
 
   Notify.success(`Hooray! We found ${totalHits} images.`);
-
-  // refs.fetchButton.classList.remove('button--hidden');
+  
   refs.galleryContainer.insertAdjacentHTML(
     'beforeend',
     createGalleryItemsMarkup(hits)
   );
-
-  // document.body.offsetHeight = bodyOffset;
-  console.log(document.body.offsetHeight + " search click");
-  console.log(window.pageYOffset + ' wo sc');
 
   const gallery = new SimpleLightbox('.gallery a', {
     captions: false,
@@ -139,7 +125,6 @@ async function onMoreButtonClick() {
   counterHits = totalHits;
 
   if (page > Math.ceil(counterHits / limit)) {
-    // refs.fetchButton.classList.add('button--hidden');
     Notify.info(`We're sorry, but you've reached the end of search results.`);
     return;
   }
@@ -150,4 +135,10 @@ async function onMoreButtonClick() {
   page += 1;
 
   smoothScroll();
+}
+
+function onEndPageScroll() {
+  if (window.innerHeight + window.pageYOffset === document.body.offsetHeight) {
+    onMoreButtonClick();
+  }
 }
