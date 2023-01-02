@@ -10,7 +10,6 @@ import { Notify } from 'notiflix';
 let searchQuery = '';
 let page = 1;
 const limit = 40;
-const bodyOffset = document.body.offsetHeight;
 
 const refs = {
   searchForm: document.querySelector('.search-form'),
