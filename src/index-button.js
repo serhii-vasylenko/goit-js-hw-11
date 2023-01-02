@@ -19,6 +19,11 @@ const refs = {
   fetchButton: document.querySelector('[data-fetch]'),
 };
 
+const gallery = new SimpleLightbox('.gallery a', {
+  captions: false,
+  showCounter: false,
+});
+
 refs.searchForm.addEventListener('submit', onFormSubmit);
 refs.fetchButton.addEventListener('click', onMoreButtonClick);
 
@@ -47,11 +52,7 @@ async function onFormSubmit(event) {
     'beforeend',
     createGalleryItemsMarkup(hits)
   );
-
-  const gallery = new SimpleLightbox('.gallery a', {
-    captions: false,
-    showCounter: false,
-  });
+  
   gallery.refresh();
 }
 
@@ -138,4 +139,5 @@ async function onMoreButtonClick() {
   page += 1;
 
   smoothScroll();
+  gallery.refresh();
 }
