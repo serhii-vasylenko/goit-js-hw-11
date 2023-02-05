@@ -7,15 +7,13 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import axios from 'axios';
 import { Notify } from 'notiflix';
 
+import createGalleryItemsMarkup from './js/createGalleryItemsMarkup';
+import getRefs from './js/getRefs';
+
 let searchQuery = '';
 let page = 1;
-const limit = 40;
 
-const refs = {
-  searchForm: document.querySelector('.search-form'),
-  galleryContainer: document.querySelector('.gallery'),
-  fetchButton: document.querySelector('[data-fetch]'),
-};
+const refs = getRefs();
 
 const gallery = new SimpleLightbox('.gallery a', {
   captions: false,
@@ -60,7 +58,7 @@ async function fetchImages(searchQuery) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-    per_page: limit,
+    per_page: limit=40,
     page: page,
   });
 
@@ -69,42 +67,6 @@ async function fetchImages(searchQuery) {
 
   const response = await axios.get(uri);
   return response.data;
-}
-
-function createGalleryItemsMarkup(galleryItems) {
-  return [...galleryItems]
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => `
-      <div class="photo-card">      
-        <a class="gallery__item" href="${largeImageURL}">
-          <img src="${webformatURL}" data-source="${largeImageURL}" alt="${tags}" loading="lazy" />
-        </a>
-        <div class="info">
-          <p class="info-item">
-            <b>Likes</b><span>${likes}</span>
-          </p>
-          <p class="info-item">
-            <b>Views</b><span></span>${views}
-          </p>
-          <p class="info-item">
-            <b>Comments</b><span>${comments}</span>
-          </p>
-          <p class="info-item">
-            <b>Downloads</b><span>${downloads}</span> 
-          </p>
-        </div>
-      </div>
-    `
-    )
-    .join('');
 }
 
 function smoothScroll() {
