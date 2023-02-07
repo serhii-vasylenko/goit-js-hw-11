@@ -12,6 +12,7 @@ import getRefs from './js/getRefs';
 
 let searchQuery = '';
 let page = 1;
+const limit = 40;
 
 const refs = getRefs();
 
@@ -58,7 +59,7 @@ async function fetchImages(searchQuery) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-    per_page: limit=40,
+    per_page: limit,
     page: page,
   });
 
